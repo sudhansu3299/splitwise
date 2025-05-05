@@ -1,0 +1,35 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+#  maxThreads: 1024
+#  minThreads: 16
+#  idleTimeout: 30s
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+    - type: file
+      currentLogFilename: ./logs/application.log
+      archivedLogFilenamePattern: ./logs/application-%d.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+  loggers:
+    io.dropwizard: INFO
+    com.splitwise: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+database:
+  driverClass: org.postgresql.Driver
+  user: neondb_owner
+  password: npg_aWZYNI2cR0tK
+  url: jdbc:postgresql://ep-patient-firefly-a1fo2p6c-pooler.ap-southeast-1.aws.neon.tech:5432/neondb
+  properties:
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.show_sql: true
+    hibernate.hbm2ddl.auto: update
+    hibernate.connection.pool_size: 10
